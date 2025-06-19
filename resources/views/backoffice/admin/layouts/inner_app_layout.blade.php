@@ -18,14 +18,14 @@
     <!-- Bootstrap CSS -->
     <link href="{{ asset('backoffice/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backoffice/css/bootstrap-extended.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
     <link href="{{ asset('backoffice/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('backoffice/css/icons.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <!-- Theme Style CSS -->
     <link rel="stylesheet" href="{{ asset('backoffice/css/dark-theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('backoffice/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('backoffice/css/header-colors.css') }}" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
     <title>Admin Dashboard</title>
 </head>
@@ -221,34 +221,9 @@
     <!--app JS-->
     <script src="{{ asset('backoffice/js/app.js') }}"></script>
 
-    <!-- notification -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const flash = document.getElementById('flash');
-            if (!flash) return;
-
-            const message = flash.dataset.message;
-            const type = flash.dataset.type;
-
-            if (message) {
-                switch (type) {
-                    case 'info':
-                        toastr.info(message);
-                        break;
-                    case 'success':
-                        toastr.success(message);
-                        break;
-                    case 'warning':
-                        toastr.warning(message);
-                        break;
-                    case 'error':
-                        toastr.error(message);
-                        break;
-                }
-            }
-        });
-    </script>
+    <!-- plugins  -->
+    @include('layouts.parts.data_table')
+    @include('layouts.parts.toast')
 </body>
 
 </html>

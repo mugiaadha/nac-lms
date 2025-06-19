@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('frontoffice/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontoffice/css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontoffice/css/fancybox.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontoffice/css/jquery-te-1.4.0.css') }}">
     <link rel="stylesheet" href="{{ asset('frontoffice/css/style.css') }}">
     <!-- end inject -->
 </head>
@@ -38,10 +39,10 @@
         </div>
     </div>
 
-    @include('frontoffice.dashboard.parts.header')
+    @include('frontoffice.dashboard.layouts.parts.inner_app_header')
 
     <section class="dashboard-area">
-        @include('frontoffice.dashboard.parts.sidebar')
+        @include('frontoffice.dashboard.layouts.parts.inner_app_sidebar')
 
         <div class="dashboard-content-wrap">
             <div class="dashboard-menu-toggler btn theme-btn theme-btn-sm lh-28 theme-btn-transparent mb-4 ml-3">
@@ -50,7 +51,7 @@
             <div class="container-fluid">
                 @yield('content')
 
-                @include('frontoffice.dashboard.parts.footer')
+                @include('frontoffice.dashboard.layouts.parts.inner_app_footer')
             </div>
         </div>
     </section>
@@ -86,17 +87,14 @@
     <script src="{{ asset('frontoffice/js/isotope.js') }}"></script>
     <script src="{{ asset('frontoffice/js/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('frontoffice/js/fancybox.js') }}"></script>
-    <script src="{{ asset('frontoffice/js/chart.js') }}"></script>
-    <script src="{{ asset('frontoffice/js/doughnut-chart.js') }}"></script>
-    <script src="{{ asset('frontoffice/js/bar-chart.js') }}"></script>
-    <script src="{{ asset('frontoffice/js/line-chart.js') }}"></script>
     <script src="{{ asset('frontoffice/js/datedropper.min.js') }}"></script>
     <script src="{{ asset('frontoffice/js/emojionearea.min.js') }}"></script>
     <script src="{{ asset('frontoffice/js/animated-skills.js') }}"></script>
     <script src="{{ asset('frontoffice/js/jquery.MultiFile.min.js') }}"></script>
+    <script src="{{ asset('frontoffice/js/jquery-te-1.4.0.min.js') }}"></script>
     <script src="{{ asset('frontoffice/js/main.js') }}"></script>
 
-    @include('frontoffice.dashboard.parts.toast')
+    @include('layouts.parts.toast')
 </body>
 
 </html>

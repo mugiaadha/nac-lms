@@ -97,7 +97,7 @@
                                             <h6 class="mb-0">Photo</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="photo" class="form-control" id="image" />
+                                            <input type="file" name="photo" class="form-control" image />
                                         </div>
                                     </div>
 
@@ -106,7 +106,7 @@
                                             <h6 class="mb-0"></h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <img id="showImage" src="{{ !empty($profile->photo) ? asset('storage/'.$profile->photo) : asset('backoffice/images/avatars/no-image.png') }}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110" height="110">
+                                            <img src="{{ !empty($profile->photo) ? asset('storage/'.$profile->photo) : asset('backoffice/images/avatars/no-image.png') }}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110" height="110" show-image>
                                         </div>
                                     </div>
 
@@ -125,16 +125,5 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#image').change(function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#showImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(e.target.files[0]);
-        });
-    });
-</script>
+@include('layouts.parts.image_preview')
 @endsection
