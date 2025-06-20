@@ -224,6 +224,7 @@
     <!-- plugins  -->
     @include('layouts.parts.data_table')
     @include('layouts.parts.toast')
+    @include('layouts.parts.sweetalert')
 </body>
 
 </html>

@@ -43,20 +43,12 @@
                                 <td><img src="{{ !empty($item->category_image) ? asset('storage/'.$item->category_image) : asset('backoffice/images/avatars/no-image.png') }}" alt=""></td>
                                 <td>{{ $item->category_name }}</td>
                                 <td>
-                                    <a href="" class=" btn btn-primary px-5">Edit</a>
-                                    <a href="" class="btn btn-danger px-5">Delete</a>
+                                    <a href="{{ route('category.edit', $item->id) }}" class=" btn btn-primary px-5">Edit</a>
+                                    <a href="{{ route('category.delete', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

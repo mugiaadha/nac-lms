@@ -26,7 +26,7 @@ class InstructorController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(route('instructor.login'))->with('message', 'Logged out successfully');
+        return redirect(route('instructor.login'))->with('message', 'Logged out Successfully');
     }
 
     public function login()
@@ -52,7 +52,7 @@ class InstructorController extends Controller
         $profile->save();
 
         $notification = [
-            'message' => 'Profile updated successfully',
+            'message' => 'Profile Updated Successfully',
             'alert-type' => 'success'
         ];
 
@@ -85,7 +85,7 @@ class InstructorController extends Controller
         $profile->save();
 
         $notification = [
-            'message' => 'Password updated successfully',
+            'message' => 'Password Updated Successfully',
             'alert-type' => 'success'
         ];
         return redirect()->back()->with($notification);

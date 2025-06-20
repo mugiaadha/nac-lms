@@ -32,13 +32,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label for="category_slug" class="form-label">Category Slug</label>
-                                <input type="text" class="form-control @error('category_slug') is-invalid @enderror" name="category_slug" id="category_slug" placeholder="First Name">
-                                @error('category_slug')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-12">
                                 <label for="category_image" class="form-label">Category Image</label>
                                 <input type="file" class="form-control @error('category_image') is-invalid @enderror" name="category_image" id="category_image" placeholder="Last Name" image>
                                 @error('category_image')

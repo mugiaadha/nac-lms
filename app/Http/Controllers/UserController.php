@@ -38,7 +38,7 @@ class UserController extends Controller
         $user->update($data);
 
         $notification = [
-            'message' => 'Profile updated successfully',
+            'message' => 'Profile Updated Successfully',
             'alert-type' => 'success'
         ];
         return redirect()->route('user.profile')->with($notification);
@@ -62,7 +62,7 @@ class UserController extends Controller
         $user->update(['password' => bcrypt($request->new_password)]);
 
         $notification = [
-            'message' => 'Password updated successfully',
+            'message' => 'Password Updated Successfully',
             'alert-type' => 'success'
         ];
         return redirect()->route('user.password')->with($notification);

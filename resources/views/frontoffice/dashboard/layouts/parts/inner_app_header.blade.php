@@ -105,7 +105,7 @@
                                                                     <i class="la la-user"></i>
                                                                 </div>
                                                                 <div class="media-body">
-                                                                    <h5>Your account has been created successfully</h5>
+                                                                    <h5>Your account has been created Successfully</h5>
                                                                     <span class="d-block lh-18 pt-1 text-gray fs-13">November 12, 2019</span>
                                                                 </div>
                                                             </a>

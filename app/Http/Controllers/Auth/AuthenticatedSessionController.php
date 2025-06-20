@@ -41,7 +41,7 @@ class AuthenticatedSessionController extends Controller
             $url = RouteServiceProvider::HOME;
         }
 
-        return redirect()->intended($url)->with('message', 'Logged in successfully');
+        return redirect()->intended($url)->with('message', 'Logged in Successfully');
     }
 
     /**

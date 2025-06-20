@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backoffice\AdminController;
 use App\Http\Controllers\Backoffice\CategoryController;
 use App\Http\Controllers\Backoffice\InstructorController;
+use App\Http\Controllers\Backoffice\SubCategoryController;
 use App\Http\Controllers\FrontOfficeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -59,15 +60,31 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-        Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
         Route::get('/change-password', [AdminController::class, 'changePassword'])->name('admin.change.password');
         Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
-        Route::get('/all-category', [CategoryController::class, 'allCategory'])->name('category.all');
-        Route::get('/add-category', [CategoryController::class, 'addCategory'])->name('category.add');
-
-        Route::post('/profile/insert-category', [CategoryController::class, 'insertCategory'])->name('category.insert');
+        Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
         Route::post('/profile/update-profile', [AdminController::class, 'profileUpdate'])->name('admin.profile.update');
         Route::post('/profile/update-password', [AdminController::class, 'profileUpdatePassword'])->name('admin.profile.update-password');
+
+        // category
+        Route::group(['prefix' => 'category'], function () {
+            Route::get('/all', [CategoryController::class, 'index'])->name('category.all');
+            Route::get('/add', [CategoryController::class, 'add'])->name('category.add');
+            Route::get('/edit-category/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+            Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+            Route::post('/insert', [CategoryController::class, 'insert'])->name('category.insert');
+            Route::post('/update', [CategoryController::class, 'update'])->name('category.update');
+        });
+
+        // sub category
+        Route::group(['prefix' => 'sub-category'], function () {
+            Route::get('/all', [SubCategoryController::class, 'index'])->name('sub-category.all');
+            Route::get('/add', [SubCategoryController::class, 'add'])->name('sub-category.add');
+            Route::get('/edit/{id}', [SubCategoryController::class, 'edit'])->name('sub-category.edit');
+            Route::get('/delete/{id}', [SubCategoryController::class, 'delete'])->name('sub-category.delete');
+            Route::post('/insert', [SubCategoryController::class, 'insert'])->name('sub-category.insert');
+            Route::post('/update', [SubCategoryController::class, 'update'])->name('sub-category.update');
+        });
     });
 });
 
