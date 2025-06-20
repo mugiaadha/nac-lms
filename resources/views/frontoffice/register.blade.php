@@ -1,4 +1,5 @@
-@extends('frontoffice.layouts.outter_app_layout') @section('content')
+@extends('frontoffice.layouts.outter_app_layout')
+@section('content')
 <!-- ================================
        START CONTACT AREA
 ================================= -->

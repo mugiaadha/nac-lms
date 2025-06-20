@@ -4,7 +4,7 @@
 <div class="tab-pane fade show active" id="edit-profile" role="tabpanel" aria-labelledby="edit-profile-tab">
     <div class="setting-body">
         <h3 class="fs-17 font-weight-semi-bold pb-4">Change Password</h3>
-        <form action="{{ route('user.password.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('profile.update.password') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
 

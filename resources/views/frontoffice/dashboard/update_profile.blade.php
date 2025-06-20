@@ -4,7 +4,7 @@
 <div class="tab-pane fade show active" id="edit-profile" role="tabpanel" aria-labelledby="edit-profile-tab">
     <div class="setting-body">
         <h3 class="fs-17 font-weight-semi-bold pb-4">Edit Profile</h3>
-        <form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="input-box col-lg-12 py-3">

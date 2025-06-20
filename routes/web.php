@@ -4,9 +4,9 @@ use App\Http\Controllers\Backoffice\AdminController;
 use App\Http\Controllers\Backoffice\CategoryController;
 use App\Http\Controllers\Backoffice\InstructorController;
 use App\Http\Controllers\Backoffice\SubCategoryController;
-use App\Http\Controllers\FrontOfficeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\FrontOfficeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,36 +22,33 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
-Route::get('/', [FrontOfficeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/instructor/register', [HomeController::class, 'register'])->name('instructor.register');
 
 Route::group(['prefix' => 'dashboard'], function () {
-    Route::get('/', [FrontOfficeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/logout', [FrontOfficeController::class, 'logout'])->name('dashboard.logout');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/logout', [HomeController::class, 'logout'])->name('dashboard.logout');
+
+
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::get('/info', [FrontOfficeController::class, 'profile'])->name('profile.info');
+        Route::get('/password', [FrontOfficeController::class, 'password'])->name('profile.password');
+        Route::post('/update', [FrontOfficeController::class, 'updateProfile'])->name('profile.update');
+        Route::post('/update-password', [FrontOfficeController::class, 'updatePassword'])->name('profile.update.password');
+    });
+})->middleware(['auth', 'verified', 'roles:student'])->name('dashboard');
 
 Route::middleware(['auth', 'roles:student'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
-    Route::get('/user/password', [UserController::class, 'password'])->name('user.password');
-
-    Route::post('/user/profile-update', [UserController::class, 'updateProfile'])->name('user.profile.update');
-    Route::post('/user/password-update', [UserController::class, 'updatePassword'])->name('user.password.update');
-
-
-    Route::delete('/user/account-delete', [UserController::class, 'profile'])->name('user.account.delete');
-
-
     // todo: Add more user routes as needed
-    Route::get('/user/courses', [UserController::class, 'courses'])->name('user.courses');
-    Route::get('/user/quizzes', [UserController::class, 'quizzes'])->name('user.quizzes');
-    Route::get('/user/bookmarks', [UserController::class, 'bookmarks'])->name('user.bookmarks');
-    Route::get('/user/messages', [UserController::class, 'messages'])->name('user.messages');
-    Route::get('/user/reviews', [UserController::class, 'reviews'])->name('user.reviews');
-    Route::get('/user/earnings', [UserController::class, 'earnings'])->name('user.earnings');
-    Route::get('/user/account', [UserController::class, 'account'])->name('user.account');
+    Route::get('/user/courses', [FrontOfficeController::class, 'courses'])->name('user.courses');
+    Route::get('/user/quizzes', [FrontOfficeController::class, 'quizzes'])->name('user.quizzes');
+    Route::get('/user/bookmarks', [FrontOfficeController::class, 'bookmarks'])->name('user.bookmarks');
+    Route::get('/user/messages', [FrontOfficeController::class, 'messages'])->name('user.messages');
+    Route::get('/user/reviews', [FrontOfficeController::class, 'reviews'])->name('user.reviews');
+    Route::get('/user/earnings', [FrontOfficeController::class, 'earnings'])->name('user.earnings');
+    Route::get('/user/account', [FrontOfficeController::class, 'account'])->name('user.account');
+    Route::delete('/user/account-delete', [FrontOfficeController::class, 'profile'])->name('user.account.delete');
 });
 
 // admin routes

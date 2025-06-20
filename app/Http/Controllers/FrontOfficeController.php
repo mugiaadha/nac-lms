@@ -2,26 +2,69 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontOfficeController extends Controller
 {
-    public function index()
+    public function profile()
     {
-        return view('frontoffice.home.home');
+        $profile = auth()->user();
+        return view('frontoffice.dashboard.update_profile', compact('profile'));
     }
 
-    public function dashboard()
+    public function password()
     {
-        return view('frontoffice.dashboard.dashboard');
+        return view('frontoffice.dashboard.update_password');
     }
 
-    public function logout(Request $request)
+    public function updateProfile(Request $request)
     {
-        auth()->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $userid = auth()->user()->id;
+        $user = User::findOrFail($userid);
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+        ]);
 
-        return redirect(route('login'))->with('message', 'Logged out Successfully');
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('avatars', 'public');
+        }
+
+        $user->update($data);
+
+        $notification = [
+            'message' => 'Profile Updated Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('profile.info')->with($notification);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+            'new_password_confirmation' => 'required|min:8',
+        ]);
+
+        $userId = auth()->user()->id;
+        $user = User::findOrFail($userId);
+
+        if (!password_verify($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
+
+        $user->update(['password' => bcrypt($request->new_password)]);
+
+        $notification = [
+            'message' => 'Password Updated Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('profile.password')->with($notification);
     }
 }
